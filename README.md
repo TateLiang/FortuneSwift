@@ -4,9 +4,10 @@ FortuneSwift is a swift framework that uses Fortune's Algorithm to generate Voro
 
 ## Examples
 <p align="left">
-  <img src="https://github.com/TateLiang/FortuneSwift/blob/TateLiang-description-edit/Images/voronoi_img1.jpg" width="450">
-  <img src="https://github.com/TateLiang/FortuneSwift/blob/TateLiang-description-edit/Images/voronoi_img2.jpg" width="450">
-  <img src="https://github.com/TateLiang/FortuneSwift/blob/TateLiang-description-edit/Images/voronoi_img3.jpg" width="450">
+  <img src="https://github.com/TateLiang/FortuneSwift/blob/TateLiang-description-edit/Images/voronoi_img1.jpg" width="400">
+  <img src="https://github.com/TateLiang/FortuneSwift/blob/TateLiang-description-edit/Images/voronoi_img2.jpg" width="400">
+  <img src="https://github.com/TateLiang/FortuneSwift/blob/TateLiang-description-edit/Images/voronoi_img3.jpg" width="400">
+  <img src="https://github.com/TateLiang/FortuneSwift/blob/TateLiang-description-edit/Images/voronoi_img4.jpg" width="400">
 </p>
 
 
