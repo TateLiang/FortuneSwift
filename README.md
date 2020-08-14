@@ -2,6 +2,13 @@
 
 FortuneSwift is a swift framework that uses Fortune's Algorithm to generate Voronoi diagrams and Delaunay triangulations from a set of points on a 2D plane. Fortune's Algorithm has a time complexity of `O(n log n)`, and a space complexity of `O(n)`. This framework is compatible with iOS 8+, macOS 10.13+.
 
+## Examples
+<p align="left">
+  <img src="https://github.com/TateLiang/FortuneSwift/blob/TateLiang-description-edit/Images/voronoi_img1.jpg" width="450">
+  <img src="https://github.com/TateLiang/FortuneSwift/blob/TateLiang-description-edit/Images/voronoi_img2.jpg" width="450">
+  <img src="https://github.com/TateLiang/FortuneSwift/blob/TateLiang-description-edit/Images/voronoi_img3.jpg" width="450">
+</p>
+
 
 ## Installation
 
@@ -10,7 +17,6 @@ The FortuneSwift framework can be installed using the Swift Package Manager. In 
 Or alternatively:
 - Add `.package(url: "https://github.com/TateLiang/FortuneSwift.git", from: "1.1.5")` to your `Package.swift` file's `dependencies`.
 - Update your packages using `$ swift package update`.
-
 
 ## Usage
 
