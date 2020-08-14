@@ -2,6 +2,14 @@
 
 FortuneSwift is a swift framework that uses Fortune's Algorithm to generate Voronoi diagrams and Delaunay triangulations from a set of points on a 2D plane. Fortune's Algorithm has a time complexity of `O(n log n)`, and a space complexity of `O(n)`. This framework is compatible with iOS 8+, macOS 10.13+.
 
+## Examples
+<p align="left">
+  <img src="https://github.com/TateLiang/FortuneSwift/blob/TateLiang-description-edit/Images/voronoi_img1.jpg" width="400">
+  <img src="https://github.com/TateLiang/FortuneSwift/blob/TateLiang-description-edit/Images/voronoi_img2.jpg" width="400">
+  <img src="https://github.com/TateLiang/FortuneSwift/blob/TateLiang-description-edit/Images/voronoi_img3.jpg" width="400">
+  <img src="https://github.com/TateLiang/FortuneSwift/blob/TateLiang-description-edit/Images/voronoi_img4.jpg" width="400">
+</p>
+
 
 ## Installation
 
@@ -10,7 +18,6 @@ The FortuneSwift framework can be installed using the Swift Package Manager. In 
 Or alternatively:
 - Add `.package(url: "https://github.com/TateLiang/FortuneSwift.git", from: "1.1.5")` to your `Package.swift` file's `dependencies`.
 - Update your packages using `$ swift package update`.
-
 
 ## Usage
 
@@ -80,9 +87,16 @@ func walk() -> [HalfEdge]?
 - `incidentSite` is `nil` if it is an edge on the exterior border of the bounding rectangle.
 - `walk()` outputs an ring of the `HalfEdges` defining the cell, or `nil` if the edges don't form a ring (should not happen)
 
+## Details
+
+##### Problem Definition
+A voronoi diagram is a tesselation of cells in a plane, representing the points closest to a particular point. For each voronoi "site", its region is defined as the points closer to it than any other site. Voronoi diagrams are also dual-graphs of the Delaunay triangulation, where each edge of the Voronoi diagram corresponds to an adjacent edge in the Delaunay triangulation between the two incident points. Voronoi diagrams have a variety of applications including in Astronomy, Art, Biology, Robotics, and Physics.
+
+##### Algorithm
+[Fortune's Algorithm](https://en.wikipedia.org/wiki/Fortune%27s_algorithm) is a sweep line algorithm in computational geometry. Like problems such as convex hulls or segment intersection, an event queue is maintained through a priority queue data structure. Fortune's Algorithm makes use of a binary search tree to also maintain a "beach line", representing the currently known cells based on the location of the sweep line. At the end of the algorithm, the infinite edges can be bounded by a polygon, in this case, a rectangle.
+
 ## Issues
 
 - Points outside of the bounding box will still effect the voronoi diagram, as the box simply bounds all of the infinite edges.
 - The algorithm does not work with the edge case where all points are collinear.
 - The algorithm does not work with the edge case where there are multiple sites at the same location.
-
