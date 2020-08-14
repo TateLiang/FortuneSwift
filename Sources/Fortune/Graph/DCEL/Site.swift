@@ -11,24 +11,24 @@ import Foundation
 /** Defines a site of a voronoi diagram. */
 public class Site: Equatable {
     
-    var x: Double
-    var y: Double
+    public var x: Double
+    public var y: Double
     
     //An edge along a border of the cell of this site
-    weak var firstEdge: HalfEdge?
-    var surroundingEdges: [HalfEdge]? {
+    public weak var firstEdge: HalfEdge?
+    public var surroundingEdges: [HalfEdge]? {
         firstEdge?.walk()
     }
     
-    var coordinate: Coordinate {
+    public var coordinate: Coordinate {
         Coordinate(x: x, y: y)
     }
     
-    init(x: Double, y: Double) {
+    public init(x: Double, y: Double) {
         self.x = x
         self.y = y
     }
-    init(_ coordinate: Coordinate) {
+    public init(_ coordinate: Coordinate) {
         self.x = coordinate.x
         self.y = coordinate.y
     }

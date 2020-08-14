@@ -11,21 +11,21 @@ import Foundation
 /** Defines a voronoi vertex. */
 public class Vertex: Equatable {
     
-    var x: Double
-    var y: Double
+    public var x: Double
+    public var y: Double
     
     //Edges going out from the vertex
-    var incidentEdges: [HalfEdge] = []
+    public var incidentEdges: [HalfEdge] = []
     
-    var coordinate: Coordinate {
+    public var coordinate: Coordinate {
         Coordinate(x: x, y: y)
     }
     
-    init(x: Double, y: Double) {
+    public init(x: Double, y: Double) {
         self.x = x
         self.y = y
     }
-    init(_ coordinate: Coordinate) {
+    public init(_ coordinate: Coordinate) {
         self.x = coordinate.x
         self.y = coordinate.y
     }

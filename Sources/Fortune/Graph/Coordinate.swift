@@ -10,8 +10,13 @@ import Foundation
 
 /** Defines a coordinate location in space. */
 public struct Coordinate: Comparable, Equatable {
-    var x: Double
-    var y: Double
+    public var x: Double
+    public var y: Double
+    
+    public init(x: Double, y: Double) {
+        self.x = x
+        self.y = y
+    }
     
     public static func < (lhs: Coordinate, rhs: Coordinate) -> Bool {
         lhs.y < rhs.y

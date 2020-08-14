@@ -14,25 +14,25 @@ import Foundation
  */
 public class HalfEdge: Equatable {
     
-    weak var origin: Vertex?
-    var destination: Vertex? {
+    public weak var origin: Vertex?
+    public var destination: Vertex? {
         get { twin?.origin }
         set { twin?.origin = newValue }
     }
-    var breakpoint: BeachNode?
+    public var breakpoint: BeachNode?
     
-    private(set) weak var twin: HalfEdge?
-    private(set) weak var next: HalfEdge?
-    private(set) weak var prev: HalfEdge?
+    public private(set) weak var twin: HalfEdge?
+    public private(set) weak var next: HalfEdge?
+    public private(set) weak var prev: HalfEdge?
     
     //the point that the edge is tracing out clockwise
-    private(set) var incidentSite: Site?
+    public private(set) var incidentSite: Site?
     
     
     
     //MARK: - Setup
     
-    init(breakpoint: BeachNode? = nil, incidentSite: Site? = nil, twin: HalfEdge? = nil) {
+    public init(breakpoint: BeachNode? = nil, incidentSite: Site? = nil, twin: HalfEdge? = nil) {
         self.breakpoint = breakpoint
         
         if let i = incidentSite {
@@ -42,7 +42,7 @@ public class HalfEdge: Equatable {
             setTwin(t)
         }
     }
-    init(origin: Vertex? = nil, incidentSite: Site? = nil, twin: HalfEdge? = nil) {
+    public init(origin: Vertex? = nil, incidentSite: Site? = nil, twin: HalfEdge? = nil) {
         self.origin = origin
         
         if let i = incidentSite {
@@ -53,15 +53,15 @@ public class HalfEdge: Equatable {
         }
     }
     
-    func setNext(_ edge: HalfEdge) {
+    public func setNext(_ edge: HalfEdge) {
         next = edge
         edge.prev = self
     }
-    func setTwin(_ edge: HalfEdge) {
+    public func setTwin(_ edge: HalfEdge) {
         self.twin = edge
         edge.twin = self
     }
-    func setIncidentSite(_ site: Site) {
+    public func setIncidentSite(_ site: Site) {
         incidentSite = site
         
         if incidentSite?.firstEdge == nil {
@@ -77,7 +77,7 @@ public class HalfEdge: Equatable {
      Traverses next pointers until it loops back to itself.
      - Returns: An array of the edges in a ring, nil if the edges do not form a ring.
      */
-    func walk() -> [HalfEdge]? {
+    public func walk() -> [HalfEdge]? {
         
         var ring: [HalfEdge] = []
         var currentEdge: HalfEdge = self
