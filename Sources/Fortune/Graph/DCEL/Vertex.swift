@@ -30,7 +30,7 @@ public class Vertex: Equatable {
         self.y = coordinate.y
     }
     
-    static func == (lhs: Vertex, rhs: Vertex) -> Bool {
+    public static func == (lhs: Vertex, rhs: Vertex) -> Bool {
         lhs === rhs
     }
 }
@@ -39,7 +39,7 @@ public class Vertex: Equatable {
 //MARK: - Debug
 
 extension Vertex: CustomStringConvertible {
-    var description: String {
+    public var description: String {
         "\(round(x*10)/10), \(round(y*10)/10)"
     }
 }

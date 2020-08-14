@@ -33,7 +33,7 @@ public class Site: Equatable {
         self.y = coordinate.y
     }
     
-    static func == (lhs: Site, rhs: Site) -> Bool {
+    public static func == (lhs: Site, rhs: Site) -> Bool {
         lhs === rhs
     }
 }
@@ -42,7 +42,7 @@ public class Site: Equatable {
 //MARK: - Debug
 
 extension Site: CustomStringConvertible {
-    var description: String {
+    public var description: String {
         "\(round(x*10)/10), \(round(y*10)/10)"
     }
 }

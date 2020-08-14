@@ -13,7 +13,7 @@ public struct Coordinate: Comparable, Equatable {
     var x: Double
     var y: Double
     
-    static func < (lhs: Coordinate, rhs: Coordinate) -> Bool {
+    public static func < (lhs: Coordinate, rhs: Coordinate) -> Bool {
         lhs.y < rhs.y
     }
 }
@@ -21,7 +21,7 @@ public struct Coordinate: Comparable, Equatable {
 //MARK: - Debug
 
 extension Coordinate: CustomStringConvertible {
-    var description: String {
+    public var description: String {
         "\(round(x*10)/10), \(round(y*10)/10)"
     }
 }

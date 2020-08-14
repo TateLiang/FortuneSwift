@@ -94,7 +94,7 @@ public class HalfEdge: Equatable {
     
     //MARK: - Equatable
     
-    static func == (lhs: HalfEdge, rhs: HalfEdge) -> Bool {
+    public static func == (lhs: HalfEdge, rhs: HalfEdge) -> Bool {
         lhs === rhs
     }
 }
@@ -104,7 +104,7 @@ public class HalfEdge: Equatable {
 //MARK: - Debug
 
 extension HalfEdge: CustomStringConvertible {
-    var description: String {
+    public var description: String {
         var string = ""
         if origin != nil {
              string += "o: \(origin!.description), "
