@@ -19,7 +19,7 @@ public class HalfEdge: Equatable {
         get { twin?.origin }
         set { twin?.origin = newValue }
     }
-    public var breakpoint: BeachNode?
+    var breakpoint: BeachNode?
     
     public private(set) weak var twin: HalfEdge?
     public private(set) weak var next: HalfEdge?
@@ -32,7 +32,7 @@ public class HalfEdge: Equatable {
     
     //MARK: - Setup
     
-    public init(breakpoint: BeachNode? = nil, incidentSite: Site? = nil, twin: HalfEdge? = nil) {
+    init(breakpoint: BeachNode? = nil, incidentSite: Site? = nil, twin: HalfEdge? = nil) {
         self.breakpoint = breakpoint
         
         if let i = incidentSite {
@@ -42,7 +42,7 @@ public class HalfEdge: Equatable {
             setTwin(t)
         }
     }
-    public init(origin: Vertex? = nil, incidentSite: Site? = nil, twin: HalfEdge? = nil) {
+    init(origin: Vertex? = nil, incidentSite: Site? = nil, twin: HalfEdge? = nil) {
         self.origin = origin
         
         if let i = incidentSite {
