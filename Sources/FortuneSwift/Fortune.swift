@@ -41,7 +41,7 @@ struct Fortune {
             case .site(let coordinate):
                 handleSiteEvent(at: coordinate)
             case .circle(let coordinate, let center, let parabola):
-                handleCircleEvent(at: coordinate, center: center, parabola: parabola)
+                handleCircleEvent(at: coordinate, center: center, parabola: parabola.value!)
             }
         }
         
@@ -52,6 +52,7 @@ struct Fortune {
             vertices = updatedValues.vertices
         }
         
+        beachLine = nil
         return (self.sites, vertices, edges)
     }
     
@@ -86,7 +87,7 @@ struct Fortune {
             let newPoint = site
             let oldPoint = focus
             
-            var leftBreakpoint: BeachNode = BeachNode(.breakpoint(sites: (oldPoint, newPoint), edge: nil))
+            let leftBreakpoint: BeachNode = BeachNode(.breakpoint(sites: (oldPoint, newPoint), edge: nil))
             let rightBreakpoint: BeachNode = BeachNode(.breakpoint(sites: (newPoint, oldPoint), edge: nil))
             
             let leftLeaf: BeachNode = BeachNode(.parabola(site: oldPoint, circleEvent: nil))
@@ -121,7 +122,7 @@ struct Fortune {
              */
             
             //replace node with new node
-            parabolaAboveSite.replace(with: &leftBreakpoint)
+            parabolaAboveSite.replace(with: leftBreakpoint)
             
             if let leftCousin = leftLeaf.predecessor() {
                 checkCircleEvent(leftCousin, leftLeaf, middleLeaf)
@@ -178,21 +179,18 @@ struct Fortune {
             C⬆ <- newEdge1
             C⬇ <- newEdge2
          */
-        if let deleted = updates.deleted,
-            let updated = updates.updated,
+        if let updated = updates.updated,
             let left = updates.left,
             let right = updates.right {
             
-            guard let deletedBreakpointEdge = deleted.data.breakpointEdge else { return }
-            guard let updatedBreakpointEdge = updated.data.breakpointEdge else { return }
             guard let leftBreakpointEdge = left.data.breakpointEdge else { return }
             guard let rightBreakpointEdge = right.data.breakpointEdge else { return }
             
             //finalizing the old edges' origins
-            deletedBreakpointEdge.breakpoint = nil
-            deletedBreakpointEdge.origin = vertex
-            updatedBreakpointEdge.breakpoint = nil
-            updatedBreakpointEdge.origin = vertex
+            leftBreakpointEdge.breakpoint = nil
+            leftBreakpointEdge.origin = vertex
+            rightBreakpointEdge.breakpoint = nil
+            rightBreakpointEdge.origin = vertex
 
             //creating a new edge
             let leftPoint = updated.data.breakpointSites!.0
@@ -214,8 +212,8 @@ struct Fortune {
             newEdge1.setNext(rightBreakpointEdge)
             
             //adding incidentedges
-            vertex.incidentEdges.append(updatedBreakpointEdge)
-            vertex.incidentEdges.append(deletedBreakpointEdge)
+            vertex.incidentEdges.append(leftBreakpointEdge)
+            vertex.incidentEdges.append(rightBreakpointEdge)
             vertex.incidentEdges.append(newEdge2)
             
             //update new breakpoint Edge
@@ -242,9 +240,8 @@ struct Fortune {
      - Returns: The two breakpoints classified into deleted, updated, left and right.
      */
     private func deleteParabola(_ parabola: BeachNode, pred: BeachNode, succ: BeachNode, sweepLine: Double) ->
-        (deleted: BeachNode?, updated: BeachNode?, left: BeachNode?, right: BeachNode?)? {
+        (updated: BeachNode?, left: BeachNode?, right: BeachNode?)? {
         
-        var deleted: BeachNode?
         var updated: BeachNode?
         var left: BeachNode?
         var right: BeachNode?
@@ -262,8 +259,8 @@ struct Fortune {
              PRED          SUCC
         */
         if parabola.isLeftChild() { //implies parent = the breakpoint on the right
-            guard var rightParabola = parabola.parent?.rightChild else { return nil }
-            parabola.parent?.replace(with: &rightParabola)
+            guard let rightParabola = parabola.parent?.rightChild else { return nil }
+            parabola.parent?.replace(with: rightParabola)
             
             //finding the other breakpoint
             guard let leftBreakpoint = beachLine?.getBreakpointNode(between: (pred, parabola), sweepLine: sweepLine) else { return nil }
@@ -271,14 +268,13 @@ struct Fortune {
             leftBreakpoint.data.updateBreakpointSites(right: successorSite)
             
             //assigning to the return variables
-            deleted = parabola.parent
             updated = leftBreakpoint
             left = leftBreakpoint
             right = parabola.parent
                 
         }else if parabola.isRightChild() { //implies parent = breakpoint on the left
-            guard var leftParabola = parabola.parent?.leftChild else { return nil }
-            parabola.parent?.replace(with: &leftParabola)
+            guard let leftParabola = parabola.parent?.leftChild else { return nil }
+            parabola.parent?.replace(with: leftParabola)
             
             //finding the other breakpoint
             guard let rightBreakpoint = beachLine?.getBreakpointNode(between: (parabola, succ), sweepLine: sweepLine) else { return nil }
@@ -286,13 +282,12 @@ struct Fortune {
             rightBreakpoint.data.updateBreakpointSites(left: predecessorSite)
             
             //assigning to the return variables
-            deleted = parabola.parent
             updated = rightBreakpoint
             left = parabola.parent
             right = rightBreakpoint
         }
-        
-        return (deleted: deleted, updated: updated, left: left, right: right)
+            
+        return (updated: updated, left: left, right: right)
     }
     
     
@@ -312,7 +307,7 @@ struct Fortune {
             //check counterclockwise since we are using a plane where y increases downward (clockwise if not)
             //^^^ therefore this reverses with the angle calculation which uses unit circle
             if !CircleGeometry.checkClockwise(a, b, c, center: circle.center) {
-                let circleEvent: Event = .circle(circle.eventPoint, center: circle.center, parabola: bNode)
+                let circleEvent: Event = .circle(circle.eventPoint, center: circle.center, parabola: Weak<BeachNode>(bNode))
                 bNode.data.parabolaCircleEvent = circleEvent
                 eventQueue.enqueue(circleEvent)
             }

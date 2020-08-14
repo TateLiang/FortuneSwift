@@ -16,7 +16,7 @@ FortuneSwift is a swift framework that uses Fortune's Algorithm to generate Voro
 The FortuneSwift framework can be installed using the Swift Package Manager. In Xcode: `File > Swift Packages > Add Package Dependency..` with URL: `https://github.com/TateLiang/FortuneSwift.git`
 
 Or alternatively:
-- Add `.package(url: "https://github.com/TateLiang/FortuneSwift.git", from: "1.1.5")` to your `Package.swift` file's `dependencies`.
+- Add `.package(url: "https://github.com/TateLiang/FortuneSwift.git", from: "1.1.6")` to your `Package.swift` file's `dependencies`.
 - Update your packages using `$ swift package update`.
 
 ## Usage

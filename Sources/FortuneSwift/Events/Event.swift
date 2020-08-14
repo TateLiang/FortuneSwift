@@ -14,7 +14,7 @@ import Foundation
 enum Event: Comparable, Equatable {
     
     case site(Coordinate)
-    case circle(Coordinate, center: Coordinate, parabola: BeachNode)
+    case circle(Coordinate, center: Coordinate, parabola: Weak<BeachNode>)
     
     var coordinate: Coordinate {
         switch self {

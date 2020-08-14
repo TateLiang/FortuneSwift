@@ -83,7 +83,7 @@ class BeachNode {
     
     
     
-    //MARK: - Setup Values
+        //MARK: - Setup Values
     
     init(_ value: Data) {
         self.data = value
@@ -107,7 +107,7 @@ class BeachNode {
         This also means that the newNode will not be up to date with the tree, use the root directly in this case.
      - Parameter newNode: A reference to the node which will replace this one.
      */
-    func replace(with newNode: inout BeachNode) {
+    func replace(with newNode: BeachNode) {
         if parent != nil { //we are not a root
             newNode.parent = parent
             
