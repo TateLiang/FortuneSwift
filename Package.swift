@@ -4,15 +4,15 @@
 import PackageDescription
 
 let package = Package(
-    name: "Fortune",
+    name: "FortuneSwift",
     platforms: [
       .iOS(.v12),
     ],
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
-            name: "Fortune",
-            targets: ["Fortune"]),
+            name: "FortuneSwift",
+            targets: ["FortuneSwift"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -22,10 +22,10 @@ let package = Package(
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
-            name: "Fortune",
+            name: "FortuneSwift",
             dependencies: []),
         .testTarget(
-            name: "FortuneTests",
-            dependencies: ["Fortune"]),
+            name: "FortuneSwiftTests",
+            dependencies: ["FortuneSwift"]),
     ]
 )
