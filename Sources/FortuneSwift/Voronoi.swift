@@ -13,7 +13,7 @@ public struct Voronoi {
     
     var fortune = Fortune()
     
-    public var sites: [Coordinate] = []
+    private var sites: [Coordinate] = []
     public var voronoiVertices: [Vertex]?
     public var voronoiEdges: [HalfEdge]?
     public var voronoiSites: [Site]?
